@@ -13,6 +13,7 @@ function genBundle (entry) {
     console.error(modules)
     writeIn(`
         ;(function (modules) {
+            console.error(modules)
             function require (filename) {
                 function innerRequire (relativePath) {
                     return require(modules[filename].dependencies[relativePath])
@@ -22,7 +23,6 @@ function genBundle (entry) {
                 ;(function (require, module, exports, code) {
                     eval(code)
                 })(innerRequire, module, module.exports, modules[filename].code)
-                console.error(module.exports)
                 return module.exports
             }
 
@@ -32,7 +32,6 @@ function genBundle (entry) {
 }
 
 /**
- * 
  * @param {String} fn 闭包
  */
 function writeIn (fn) {

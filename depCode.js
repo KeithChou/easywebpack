@@ -1,3 +1,4 @@
+
 const fs = require('fs')
 const path = require('path')
 const parser = require('@babel/parser')
@@ -5,7 +6,7 @@ const traverse = require('@babel/traverse').default
 const babel = require('@babel/core')
 
 /**
- * 通过ast获取文件依赖
+ * 获取文件依赖和代码
  * @param {String} filename 文件名
  */
 function getDepCode (filename) {
@@ -45,7 +46,9 @@ function getDependencies (ast, filename) {
     traverse(ast, {
         // es6引用
         ImportDeclaration ({ node }) {
+            // 获取文件路径
             const dirname = path.dirname(filename)
+            // 获取文件名
             const newFile = './' + path.join(dirname, node.source.value)
 
             dependencies[node.source.value] = newFile
