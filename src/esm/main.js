@@ -7,5 +7,6 @@ console.error('person', person.getPerson())
 console.error('life', person.getLife())
 
 export {
+    Person,
     Life
 }

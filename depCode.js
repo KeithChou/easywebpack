@@ -81,6 +81,4 @@ function genCodeFromAst (ast) {
     return code
 }
 
-console.error(getDepCode('./src/esm/Life.js'))
-
 module.exports = getDepCode

@@ -1,1 +1,5 @@
-通过学习webpack4+的打包实现，自己动手写了个简单的模块打包器
+##### quick start
+
+- 安装 `npm install`
+- 验证CommonJS打包 `node index-require.js`
+- 验证ES Module打包 `node index-esm.js`
