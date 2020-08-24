@@ -18,7 +18,7 @@ function depModule (entry) {
 function getDeepDep (codeObj) {
     const depArr = new Array(1).fill(codeObj)
     for (let i = 0; i < depArr.length; i++) {
-        // 拿到文件所依赖的模块集合, dependencies的值参考depCode
+        // 递归处理，拿到文件所依赖的模块集合, dependencies的值参考depCode
         const { dependencies } = depArr[i]
         for (const dep of Object.values(dependencies)) {
             // 将相关的模块push进depArr中
@@ -42,5 +42,6 @@ function genModule (depArr) {
     })
     return obj
 }
+
 
 module.exports = depModule

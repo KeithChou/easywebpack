@@ -10,23 +10,21 @@ function genBundle (entry) {
     // 注意这里要将对象转成字符串
     // 否则会被反引用解析成[object Object]
     const modules = JSON.stringify(depModule(entry))
-    console.error(modules)
+
     writeIn(`
         ;(function (modules) {
-            console.error(modules)
-            function require (filename) {
-                function innerRequire (relativePath) {
-                    return require(modules[filename].dependencies[relativePath])
+            function bundle (filename) {
+                function require (relativePath) {
+                    return bundle(modules[filename].dependencies[relativePath])
                 }
 
                 var module = { exports: {} }
                 ;(function (require, module, exports, code) {
                     eval(code)
-                })(innerRequire, module, module.exports, modules[filename].code)
+                })(require, module, module.exports, modules[filename].code)
                 return module.exports
             }
-
-            require('${entry}')
+            bundle('${entry}')
         })(${modules})
     `)
 }

@@ -39,10 +39,9 @@ function genAst (filename) {
  * @param {Object} ast 抽象语法树
  */
 function getDependencies (ast, filename) {
-    // 获取入口文件的依赖
+    const dependencies = {}
     // key: 引用路径
     // value: 文件被引用文件的真实路径
-    const dependencies = {}
     traverse(ast, {
         // es6引用
         ImportDeclaration ({ node }) {
@@ -81,5 +80,7 @@ function genCodeFromAst (ast) {
     })
     return code
 }
+
+console.error(getDepCode('./src/esm/Life.js'))
 
 module.exports = getDepCode
