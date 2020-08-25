@@ -11,6 +11,9 @@ function genBundle (entry) {
     // 否则会被反引用解析成[object Object]
     const modules = JSON.stringify(depModule(entry))
 
+    // 1. 提供闭包环境
+    // 2. eval函数执行，提供require、module、exports对象
+    // 3. 在模块require时，return module.
     writeIn(`
         ;(function (modules) {
             function bundle (filename) {
